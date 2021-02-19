@@ -50,5 +50,5 @@ G1是CMS的改进版本，为了实现高吞吐、减少内存碎片、停顿时
 ## 4 类加载器
 
 ## 参考资料
-metaspace讲解： https://stuefe.de/posts/metaspace/what-is-metaspace/
+metaspace讲解： https://stuefe.de/posts/metaspace/what-is-metaspace/ <br>
 jvm参数官方文档：https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html
