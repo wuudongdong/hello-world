@@ -93,10 +93,17 @@ Redis的单线程指的是Redis处理网络IO和数据读写是在一个线程�
 ## 8. Redis 的主从复制是如何实现的？
 Redis的主从复制是采用首次全量RDB加基于长连接的增量指令来实现的。那么主从是如何保证数据一致性的呢？在主从第一次传输RDB的过程中，主节点会将在此期间
 的写命令写入replication buffer中，待文件传输完成后，将相应的指令基于长连接发送给从节点，如果主从的网络断开连接，主节点会记录各从节点的指令到
-repl backlog buffer中去，它是一个环形缓冲区，等从节点连接上主节点的时候，再发送给从节点偏移量以后的指令。
+repl backlog buffer中去，它是一个环形缓冲区，等从节点连接上主节点的时候，再发送给从节点偏移量以后的指令。<br>
 参考资料：https://time.geekbang.org/column/article/272852
 
 ## 9. Redis 的数据淘汰策略有几种？
 Redis4.0以后有8种数据淘汰策略，默认的配置是不进行数据淘汰的 noeviction，剩余的7种按照是否有过期时间分成两种，其中它们共有的策略有random、lru、
 lfu，有过期时间的还多一种策略是ttl，按照过期时间的先后淘汰。推荐如果不存在热点数据的话，使用allkeys-lru，如果有那就使用volatile-lru，最大内存
-推荐设置全数据量的15%～30%。
+推荐设置全数据量的15%～30%。<br>
+参考资料：https://time.geekbang.org/column/article/294640
+
+## 10. 有海量key和value都比较小的数据，在redis中如何存储才更省内存？
+String这种数据结构的额外内存消耗比较大，除去实际的数据外，每增加一个String这种结构，需要64字节存储包括dictEntry、RedisObject、SDS这些结构。
+相比String使用压缩列表来存储会节省很多内存，使用Hash类型的二级编码方法保存数据，把key拆分成两段，一个做redis的key，一个做Hash这种数据类型的
+key，二级编码方法采用的id是有讲究的，要保证哈希集合的最大个数小于配置的使用压缩列表方式保存数据的阈值。<br>
+参考资料：https://time.geekbang.org/column/article/279649
