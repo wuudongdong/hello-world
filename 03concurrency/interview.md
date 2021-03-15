@@ -21,4 +21,10 @@ cas更新对象头为当前线程id，偏向锁即使出同步块也不会释放
 ReentrantLock是java5以后出现的
 参考资料：https://wiki.openjdk.java.net/display/HotSpot/Synchronization
 
-## 4. 
+## 4. HashMap1.7和1.8扩容有什么区别？ConcurrentHashMap1.7和1.8有什么区别？
+HashMap1.7在多线程的情况下存在对象丢失和死链的问题，原因是扩容的过程中存在对next指针的并发修改。java8以后对修复了这个问题，同时当链表长度大于
+等于8且数组长度大于等于64时，链表会变为红黑树，当链表长度小于等于6时，红黑树重新变为链表。
+ConcurrentHashMap1.7使用的是分段锁，来提高并发性，跟分库分表类似，初始有16个segment锁，每个segment下又是一个map，1.8以后去除了分段锁，使用
+cas或者锁单个节点来进一步减少线程冲突。
+
+参考资料：https://cloud.tencent.com/developer/article/1129979
