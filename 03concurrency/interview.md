@@ -34,3 +34,6 @@ cas或者锁单个节点来进一步减少线程冲突。
 
 ## 6. CopyOnWriteArrayList的实现原理？主要应用什么场景下？优缺点分别是？
 写线程加锁，拷贝一个副本，写线程在副本上操作，最后更新引用值，使用volatile保证读线程立即可见。
+
+## 7. 线程池的状态有哪些？
+Running、shutdown、stop、tidying、terminated
