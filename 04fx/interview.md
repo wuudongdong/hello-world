@@ -8,7 +8,7 @@ spring需要装载的bean，同时它还会从整个项目的依赖的jar中的M
 Spring 的事务挂起依靠的是 ThreadLocal 来实现的。事务挂起时会清空 ThreadLocal 中与当前线程有关的数据，包括连接、事务隔离级别、事务传播等级，
 并且将清空的数据返回，由当前事务持有。
 
-参考资料：https://my.oschina.net/anur/blog/3155627
+参考资料：https://my.oschina.net/anur/blog/3155627 https://blog.csdn.net/qqqqq1993qqqqq/article/details/77991338
 
 ## 3. Spring 是如何解决循环依赖的？
 Spring 的对象装配的过程其实是一个递归调用的过程，AbstractBeanFactory 的 doGetBean 是整个 Spring 对象装配的核心方法，这个方法里有个 getSingleton
@@ -22,4 +22,9 @@ Spring 的对象装配的过程其实是一个递归调用的过程，AbstractBe
 BeanFactory 是底层的IOC容器，FactoryBean 是创建 Bean 的一种方式，为了解决复杂对象初始化的场景。
 
 参考资料：https://time.geekbang.org/course/detail/100042601-187470
+
+## 5. 什么情况下事务注解会失效？
+
+
+
 
