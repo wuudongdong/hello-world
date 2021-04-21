@@ -12,3 +12,7 @@
 roaringbitmap，二是在业务侧做幂等。
 
 参考资料：https://cloud.tencent.com/developer/article/1625607
+
+## 3. Kafka 的各个组件的作用，以及 consumer group 的作用？
+
+## 4. RabbitMQ 如何保证投递消息的有序性的？
